@@ -21,10 +21,22 @@ public class AccountController {
         return AccountService.getAccounts();
     }
 
+    @PutMapping
+    public ResponseEntity<Object> update(@RequestBody AccountModel Account) {
+        try
+        {
+            this.AccountService.update(Account);
+        }
+        catch(Exception e){
+            return ResponseHandler.generateResponse("Cannot update", HttpStatus.BAD_REQUEST, Account);
+        }
+        return ResponseHandler.generateResponse("updated!", HttpStatus.OK, todo);
+    }
     @PostMapping()
     public AccountModel saveAccount(@RequestBody AccountModel Account){
         return this.AccountService.saveAccount(Account);
     }
+
 
 
 
